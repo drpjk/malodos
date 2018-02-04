@@ -1302,8 +1302,8 @@ class FPDF:
 			self.Error('Don\'t alter the locale before including class file');
 			
 		#Check for decimal separator
-		if(sprintf('%.1f',1.0)!='1.0'):
-			setlocale(LC_NUMERIC,'C');
+#		if(sprintf('%.1f',1.0)!='1.0'):
+#			setlocale(LC_NUMERIC,'C');
 		return
 	
 	def _getfontpath(self):

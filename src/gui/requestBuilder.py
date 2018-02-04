@@ -245,9 +245,9 @@ class builderConditionDialog(wx.Dialog):
         self.Close()
 
 
-class builderConditionPage(wx.NotebookPage):
+class builderConditionPage(wx.Window):
     def __init__(self,parent,builder):
-        wx.NotebookPage.__init__(self,parent)
+        wx.Window.__init__(self,parent)
         self.builder=builder
         self.winCond = builderConditionPanel(self,True)
         self.totSizer=wx.BoxSizer(wx.HORIZONTAL)
@@ -265,7 +265,7 @@ class builderConditionPage(wx.NotebookPage):
 
 
 
-class builderPage(wx.NotebookPage):
+class builderPage(wx.Window):
     '''
     GUI dialog for addition of a file into the database
     '''
@@ -280,7 +280,7 @@ class builderPage(wx.NotebookPage):
         Constructor
         '''
         
-        wx.NotebookPage.__init__(self, parent)
+        wx.Window.__init__(self, parent)
         self.builder=builder
         self.panel = wx.Panel(self, -1)
         self.totSizer = wx.GridBagSizer(4,2)

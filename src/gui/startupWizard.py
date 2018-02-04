@@ -8,8 +8,8 @@ attached to this project (LICENSE.txt file)
 class related to the document to go wizard
 '''
 
-import wx.wizard
-class StartupWizard(wx.wizard.Wizard):
+import wx.adv
+class StartupWizard(wx.adv.Wizard):
     '''
     wizard helping user to configure the preferences
     '''
@@ -20,9 +20,9 @@ class StartupWizard(wx.wizard.Wizard):
         Constructor
         '''
  
-class PageScannerChoice (wx.wizard.PyWizardPage):
+class PageScannerChoice (wx.adv.PyWizardPage):
     def __init__(self,parent):
-        wx.wizard.PyWizardPage.__init__(self,parent)
+        wx.adv.PyWizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(self.sizer)
         
@@ -32,9 +32,9 @@ class PageScannerChoice (wx.wizard.PyWizardPage):
         return None
 
 
-class PageOCRChoice (wx.wizard.PyWizardPage):
+class PageOCRChoice (wx.adv.PyWizardPage):
     def __init__(self,parent):
-        wx.wizard.PyWizardPage.__init__(self,parent)
+        wx.adv.PyWizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(self.sizer)
         
@@ -43,9 +43,9 @@ class PageOCRChoice (wx.wizard.PyWizardPage):
     def GetPrev(self):
         return None
 
-class PageSurveyChoice (wx.wizard.PyWizardPage):
+class PageSurveyChoice (wx.adv.PyWizardPage):
     def __init__(self,parent):
-        wx.wizard.PyWizardPage.__init__(self,parent)
+        wx.adv.PyWizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(self.sizer)
         
@@ -54,9 +54,9 @@ class PageSurveyChoice (wx.wizard.PyWizardPage):
     def GetPrev(self):
         return None
 
-class PageFoldersChoice (wx.wizard.PyWizardPage):
+class PageFoldersChoice (wx.adv.PyWizardPage):
     def __init__(self,parent):
-        wx.wizard.PyWizardPage.__init__(self,parent)
+        wx.adv.PyWizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.SetSizer(self.sizer)
         

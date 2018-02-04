@@ -48,7 +48,7 @@ class OptionsWindow(wx.Dialog):
 			if a.type==scannerOption.TYPE_BUTTON: continue
 			self.parName.append(a.name)
 			self.txtOpt.append( wx.StaticText(self.panel,-1, a.title) ) 
-			self.txtOpt[k].SetToolTipString(a.name + ' : ' +a.description)
+			self.txtOpt[k].SetToolTip(a.name + ' : ' +a.description)
 			self.totalWin.Add(self.txtOpt[k],0,wx.EXPAND)
 			
 			if isinstance(defaultValues,dict) and defaultValues.has_key(self.parName[k]) :
@@ -119,7 +119,7 @@ class OptionsWindow(wx.Dialog):
 			else:
 				self.wOptions.append( wx.StaticText(self.panel,-1,''))			
 			
-			self.wOptions[k].SetToolTipString(a.description)
+			self.wOptions[k].SetToolTip(a.description)
 			self.totalWin.Add(self.wOptions[k],0,wx.EXPAND)
 			
 			k=k+1
@@ -174,23 +174,23 @@ class ScanWindow(wx.Dialog):
 		self.buttonPart = wx.BoxSizer(wx.HORIZONTAL)
 
 		self.btScan = wx.BitmapButton(self.panel,-1, wx.Bitmap(Resources.get_icon_filename('PERFORM_SCAN')))
-		self.btScan.SetToolTipString(_('Scan'))
+		self.btScan.SetToolTip(_('Scan'))
 		self.buttonPart.Add(self.btScan ,0)
 
 		self.btAddScan = wx.BitmapButton(self.panel, 666, wx.Bitmap(Resources.get_icon_filename('ADD_PERFORM_SCAN')))
-		self.btAddScan.SetToolTipString(_('Add scan'))
+		self.btAddScan.SetToolTip(_('Add scan'))
 		self.buttonPart.Add(self.btAddScan ,0)
 
 		self.btSave = wx.BitmapButton(self.panel, -1, wx.Bitmap(Resources.get_icon_filename('RECORD_SCANNED')))
-		self.btSave.SetToolTipString(_('Record'))
+		self.btSave.SetToolTip(_('Record'))
 		self.buttonPart.Add(self.btSave ,0)
 
 		self.btSource = wx.BitmapButton(self.panel, -1, wx.Bitmap(Resources.get_icon_filename('CHOOSE_SCANNER')))
-		self.btSource.SetToolTipString(_('Select Scanner'))
+		self.btSource.SetToolTip(_('Select Scanner'))
 		self.buttonPart.Add(self.btSource ,0)
 
 		self.btOptions = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('SCANNER_PREFERENCES')))
-		self.btOptions.SetToolTipString(_('Options'))
+		self.btOptions.SetToolTip(_('Options'))
 		self.buttonPart.Add(self.btOptions ,0)
 
 

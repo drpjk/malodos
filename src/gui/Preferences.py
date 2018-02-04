@@ -24,17 +24,17 @@ from algorithms.general import str_to_bool
 from algorithms.words import get_available_languages
 import virtualFolder
 
-class PrefFolders(wx.NotebookPage):
+class PrefFolders(wx.Window):
     def __init__(self,parent,page_id,name):
-        wx.NotebookPage.__init__(self,parent,page_id,name=name)
+        wx.Window.__init__(self,parent,page_id,name=name)
         self.panel = wx.Panel(self, -1)
         self.sizer = wx.BoxSizer(wx.HORIZONTAL)
         self.vFold = virtualFolder.FolderView(self.panel,False,True)
         self.sizer.Add(self.vFold,1,flag=wx.ALL|wx.EXPAND)
         self.panel.SetSizerAndFit(self.sizer)
-class PrefContent(wx.NotebookPage):
+class PrefContent(wx.Window):
     def __init__(self,parent,page_id,name):
-        wx.NotebookPage.__init__(self,parent,page_id,name=name)
+        wx.Window.__init__(self,parent,page_id,name=name)
         self.panel = wx.Panel(self, -1)
         self.sizer = wx.GridBagSizer(1,1)
         self.cbAutoOCR = wx.CheckBox(self.panel,-1,_('Automatically proceed to OCR when a new document is added to the database'))
@@ -93,9 +93,9 @@ class PrefContent(wx.NotebookPage):
                 self.clSpellProgs.Check(i,False)
         self.cbAutoOCR.Value = str_to_bool( database.theConfig.get_param('OCR', 'autoStart','1') )
 
-class PrefScanner(wx.NotebookPage):
+class PrefScanner(wx.Window):
     def __init__(self,parent,idp,name):
-        wx.NotebookPage.__init__(self,parent,idp,name=name)
+        wx.Window.__init__(self,parent,idp,name=name)
         self.panel = wx.Panel(self, -1)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         
@@ -186,9 +186,9 @@ class PrefScanner(wx.NotebookPage):
         currentScanner = database.theConfig.get_current_scanner()
         self.stScanner.Label = currentScanner
         
-class PrefSurveyDir(wx.NotebookPage):
+class PrefSurveyDir(wx.Window):
     def __init__(self,parent,page_id,name):
-        wx.NotebookPage.__init__(self,parent,page_id,name=name)
+        wx.Window.__init__(self,parent,page_id,name=name)
         self.panel = wx.Panel(self, -1)
         self.dirSurveySizer = wx.GridBagSizer(1,1)
         self.lstSurveyDirs = wx.CheckListBox(self.panel,-1,style=wx.LB_EXTENDED)

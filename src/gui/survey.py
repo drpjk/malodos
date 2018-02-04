@@ -27,9 +27,9 @@ class SurveyWindow(wx.Dialog):
 # ****    abstract base for any content tab       ****
 # ****    ---------------------------------       ****
 # ****************************************************
-    class Content(wx.NotebookPage):
+    class Content(wx.Window):
         def __init__(self,parent,baseWin,tabName):
-            wx.NotebookPage.__init__(self,parent,-1,name=tabName)
+            wx.Window.__init__(self,parent,-1,name=tabName)
             self.baseWin=baseWin
             self.panel = wx.Panel(self, -1)
         def populate(self):

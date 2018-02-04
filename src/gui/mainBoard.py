@@ -18,7 +18,7 @@ import docPrinter
 from data import theData
 import fileMerge
 
-import scanWindow
+#import scanWindow
 import survey
 from gui import utilities
 import hashlib
@@ -86,14 +86,14 @@ class bugReportWindow(wx.Dialog):
         self.Close()
 
 
-class FlatView(wx.NotebookPage):
+class FlatView(wx.Window):
     ID_ALPHABETICAL=(1,_('Alphabetical'))
     ID_CHRONO_DOC=(2,_('Chronological (document)'))
     ID_CHRONO_REG=(3,_('Chronological (registering date)'))
     ID_PERTINENCE=(4,_('Relevance'))
     CHOICES=[ID_ALPHABETICAL,ID_CHRONO_DOC,ID_CHRONO_REG,]#ID_PERTINENCE]#
     def __init__(self,parent,idt,name,board):
-        wx.NotebookPage.__init__(self,parent,idt,name=name)
+        wx.Window.__init__(self,parent,idt,name=name)
         self.board = board
         self.totSizer = wx.GridBagSizer()
         self.panel = wx.Panel(self, -1)
@@ -194,7 +194,7 @@ class FlatView(wx.NotebookPage):
         self.board.actionDocSelect(row)
 
 
-class BasketView(wx.NotebookPage):
+class BasketView(wx.Window):
     ID_ALPHABETICAL=(1,_('Alphabetical'))
     ID_CHRONO_DOC=(2,_('Chronological (document)'))
     ID_CHRONO_REG=(3,_('Chronological (registering date)'))
@@ -205,7 +205,7 @@ class BasketView(wx.NotebookPage):
     ID_MERGE=2
     ID_TOGO=3
     def __init__(self,parent,idt,name,board):
-        wx.NotebookPage.__init__(self,parent,idt,name=name)
+        wx.Window.__init__(self,parent,idt,name=name)
         self.board = board
         self.totSizer = wx.GridBagSizer()
         self.panel = wx.Panel(self, -1)
@@ -217,13 +217,13 @@ class BasketView(wx.NotebookPage):
 #        self.icBar.AddLabelTool(self.ID_TOGO,'',wx.Bitmap(Resources.get_icon_filename('DOC_ZIP32')),shortHelp=_('Make a portable zip of all the documents in the basket'))
         self.bxSizer=wx.BoxSizer(wx.HORIZONTAL)
         self.btUpdateRemove = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('REMOVE_SELECTION32')))
-        self.btUpdateRemove.SetToolTipString(_('Remove/delete all documents in the basket'))
+        self.btUpdateRemove.SetToolTip(_('Remove/delete all documents in the basket'))
 
         self.btMerge = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('MERGE_SELECTION32')))
-        self.btMerge.SetToolTipString(_('Merge together all documents in the basket'))
+        self.btMerge.SetToolTip(_('Merge together all documents in the basket'))
 
         self.btToGo = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('DOC_ZIP32')))
-        self.btToGo.SetToolTipString(_('Make a portable zip of all the documents in the basket'))
+        self.btToGo.SetToolTip(_('Make a portable zip of all the documents in the basket'))
 
 
         self.lbDocuments = wx.ListBox(self.panel, -1,style=wx.LB_EXTENDED )
@@ -300,9 +300,9 @@ class BasketView(wx.NotebookPage):
 
 
 
-class FolderView(wx.NotebookPage):
+class FolderView(wx.Window):
     def __init__(self,parent,idt,name,board):
-        wx.NotebookPage.__init__(self,parent,idt,name=name)
+        wx.Window.__init__(self,parent,idt,name=name)
         self.board = board
         self.totSizer = wx.BoxSizer(wx.VERTICAL)
         self.panel = wx.Panel(self, -1)
@@ -498,12 +498,12 @@ class MainFrame(wx.Frame):
         self.recordPart.lbFileName.Disable()
         self.recordSizer.Add(self.recordPart,1,wx.EXPAND)
         self.btUpdateRecord = wx.BitmapButton(self.docViewPanel,-1,wx.Bitmap(Resources.get_icon_filename('REFRESH')))
-        self.btUpdateRecord.SetToolTipString(_('Update'))
+        self.btUpdateRecord.SetToolTip(_('Update'))
         self.btShowExternal = wx.BitmapButton(self.docViewPanel,-1,wx.Bitmap(Resources.get_icon_filename('SYSTEM_SHOW')))
-        self.btShowExternal.SetToolTipString(_('System show'))
+        self.btShowExternal.SetToolTip(_('System show'))
 
         #self.btDoOCR = wx.BitmapButton(self.docViewPanel,-1,wx.Bitmap(Resources.get_icon_filename('SYSTEM_SHOW')))
-        #self.btDoOCR.SetToolTipString(_('Do OCR'))
+        #self.btDoOCR.SetToolTip(_('Do OCR'))
 
         self.docViewSizer.Add(self.recordSizer,0,wx.EXPAND)
         self.recordButtonSizer = wx.BoxSizer(wx.VERTICAL)
