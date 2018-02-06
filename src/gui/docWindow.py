@@ -42,7 +42,10 @@ class docWindow(wx.Window) :
         self.img = None
         self.totalWin = wx.BoxSizer(wx.VERTICAL)
         self.buttonPart = wx.BoxSizer(wx.HORIZONTAL)
-        self.btLeft = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('PREVIOUS_PAGE')))
+        temp = Resources.get_icon_filename('PREVIOUS_PAGE')
+        temp2 = wx.Bitmap(temp)
+        self.btLeft = wx.BitmapButton(self.panel,-1,temp2)
+#        self.btLeft = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('PREVIOUS_PAGE')))
         self.btLeft.SetToolTip(_('Previous page'))
         self.btRight = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('NEXT_PAGE')))
         self.btRight.SetToolTip(_('Next page'))
@@ -145,7 +148,7 @@ class docWindow(wx.Window) :
         self.canvas.SetEvtHandlerEnabled(False)
         MAX_RESOLUTION = 1024
         if do_layout:
-            self.panel.SetSize(self.GetSizeTuple())
+            self.panel.SetSize(self.GetSize())
             self.totalWin.Layout()
         if len(data.theData.pil_images)==0:
             self.lbImage.SetLabel(_('no page'))
@@ -154,7 +157,7 @@ class docWindow(wx.Window) :
         if data.theData.image_changed or self.img is None:
             self.img = data.theData.get_image().convert('RGB')
             #self.img = wx.EmptyImage(pil_image.size[0],pil_image.size[1])
-            #self.img.SetData(pil_image.convert("RGB").tostring())
+            #self.img.SetData(pil_image.convert("RGB").tobytes())
             s =self.img.size
             if s[0] > MAX_RESOLUTION or s[1]>MAX_RESOLUTION :
                 q = [ MAX_RESOLUTION/float(s[0]) ,MAX_RESOLUTION/float(s[1]) ]
@@ -208,7 +211,7 @@ class docWindow(wx.Window) :
             displ = [ self.canvasPos[0] + (self.canvasSize[0] - size[0])/2 , self.canvasPos[1] + (self.canvasSize[1] - size[1])/2 ]
             self.canvas.SetPosition(displ)
             self.canvas.SetSize(size)
-            wxbm = wx.BitmapFromBuffer(size[0],size[1],theImage.resize(size,quality).tostring())
+            wxbm = wx.Bitmap.FromBuffer(size[0],size[1],theImage.resize(size,quality).tobytes())
             self.canvas.SetBitmap(wxbm)
         self.canvas.SetEvtHandlerEnabled(True)
     #===========================================================================

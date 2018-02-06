@@ -27,24 +27,24 @@ import datetime
 __version__ = '1.3.1'
 
 
-exe_name = os.path.dirname(os.path.abspath(os.path.join(algorithms.__file__,'..')))
-if not exe_name:
+basepath = os.path.dirname(os.path.abspath(os.path.join(algorithms.__file__,'..')))
+if not basepath:
     try:
-        exe_name = os.getcwd()
+        basepath = os.getcwd()
     except:
         pass
-if not exe_name :
+if not basepath :
     try:
-        exe_name = os.path.dirname(os.path.realpath(sys.executable))
+        basepath = os.path.dirname(os.path.realpath(sys.executable))
     except:
         pass
-if not exe_name :
+if not basepath :
     try:
-        exe_name = os.path.dirname(__file__)
+        basepath = os.path.dirname(__file__)
     except:
         pass
-if not exe_name: exe_name = '.'
-ld = os.path.join(exe_name ,'locale')
+if not basepath: basepath = '.'
+ld = os.path.join(basepath ,'locale')
 # code bellow copied from http://www.journaldunet.com/developpeur/tutoriel/pyt/070607-python-traduction/2.shtml 
 if os.name == 'nt':
     lang = locale.getdefaultlocale()[0][:2]
@@ -108,6 +108,7 @@ def print_query_result(sFilter,frmt='%t',date_format='%d-%m-%Y'):
             logging.exception('Problem in query format : ' + str(E))
         print s.encode('utf8','replace')
 
+
 def start_gui():
     import wx
     import gui.mainBoard as mainWindow
@@ -118,6 +119,7 @@ def start_gui():
             if not database.theBase.buildDB():
                 return False
             #if len(sys.argv)>1 and os.path.exists(sys.argv[1]): database.theBase.use_base(sys.argv[1])
+            self.wxlocale = wx.Locale(wx.LANGUAGE_DEFAULT)
             frame = mainWindow.MainFrame(None, 'MALODOS')
             frame.Show(True)
             self.SetTopWindow(frame)

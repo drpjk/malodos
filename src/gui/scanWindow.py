@@ -132,7 +132,7 @@ class OptionsWindow(wx.Dialog):
 		self.panel.SetAutoLayout(True)
 		self.panel.Layout()
 		self.panel.Fit()
-		width,height=self.panel.GetSizeTuple()
+		width,height=self.panel.GetSize()
 		u = 10.0
 		self.ScrollWindow.SetScrollbars(u, u, width/u, height/u)
 		if width>400 : width=400

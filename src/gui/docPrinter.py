@@ -34,7 +34,7 @@ class docPrinter(wx.Printout):
         pil_image = theData.get_image(page_num-1)
         if not pil_image : return False
         img = wx.EmptyImage(pil_image.size[0],pil_image.size[1])
-        img.SetData(pil_image.convert("RGB").tostring())
+        img.SetData(pil_image.convert("RGB").tobytes())
         img.Rescale(dcSize[0],dcSize[1],wx.IMAGE_QUALITY_HIGH)
         bm = img.ConvertToBitmap()        
         dc.DrawBitmap(bm,0,0)

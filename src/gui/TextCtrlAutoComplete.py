@@ -28,11 +28,11 @@ def getSmallUpArrowData():
 \x82'
 
 def getSmallUpArrowBitmap():
-    return BitmapFromImage(getSmallUpArrowImage())
+    return wx.Bitmap(getSmallUpArrowImage())
 
 def getSmallUpArrowImage():
     stream = cStringIO.StringIO(getSmallUpArrowData())
-    return ImageFromStream(stream)
+    return wx.Image(stream)
 
 
 def getSmallDnArrowData():
@@ -45,11 +45,11 @@ def getSmallDnArrowData():
 ?\x84B\xef\x00\x00\x00\x00IEND\xaeB`\x82"
 
 def getSmallDnArrowBitmap():
-    return BitmapFromImage(getSmallDnArrowImage())
+    return wx.Bitmap(getSmallDnArrowImage())
 
 def getSmallDnArrowImage():
     stream = cStringIO.StringIO(getSmallDnArrowData())
-    return ImageFromStream(stream)
+    return wx.Image(stream)
 #----------------------------------------------------------------------
 
 class myListCtrl(wx.ListCtrl, listmix.ListCtrlAutoWidthMixin):
@@ -338,8 +338,8 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin ):
 
             for numCol, colVal in enumerate(valRow):
                 if numCol == 0:
-                    index = self.dropdownlistbox.InsertImageStringItem(sys.maxint, colVal, -1)
-                self.dropdownlistbox.SetStringItem(index, numCol, colVal)
+                    index = self.dropdownlistbox.InsertItem(sys.maxint, colVal, -1)
+                self.dropdownlistbox.SetItem(index, numCol, colVal)
                 self.dropdownlistbox.SetItemData(index, numRow)
 
         self._setListSize()
@@ -376,9 +376,9 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin ):
         self.dropdownlistbox.InsertColumn(0, "")
 
         for num, colVal in enumerate(self._choices):
-            index = self.dropdownlistbox.InsertImageStringItem(sys.maxint, colVal, -1)
+            index = self.dropdownlistbox.InsertItem(sys.maxint, colVal, -1)
 
-            self.dropdownlistbox.SetStringItem(index, 0, colVal)
+            self.dropdownlistbox.SetItem(index, 0, colVal)
             self.dropdownlistbox.SetItemData(index, num)
 
         self._setListSize()

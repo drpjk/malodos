@@ -109,17 +109,17 @@ class FolderView (wx.Panel):
     def fillDirectories(self):
         def fillUnder(itemID):
             addedItems = []
-            folderID = self.treeView.GetPyData(itemID)
+            folderID = self.treeView.GetItemData(itemID)
             descendants = theBase.folders_childs_of(folderID)
             for row in descendants:
                 idt = row[0]
                 name = row[1]
-                item = self.treeView.AppendItem(itemID,name,data=wx.TreeItemData(idt))
+                item = self.treeView.AppendItem(itemID,name,data=(idt))
                 if idt in self.selectedList : self.treeView.SetItemBold(item)
                 addedItems.append(item)
             for item in addedItems : fillUnder(item)
         self.treeView.DeleteAllItems()
-        itemID = self.treeView.AddRoot(_('ROOT'),data=wx.TreeItemData(0))
+        itemID = self.treeView.AddRoot(_('ROOT'),data=(0))
         fillUnder(itemID)
         self.treeView.ExpandAll()
     def setSelectedList(self,selectedList):

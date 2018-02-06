@@ -8,6 +8,7 @@ attached to this project (LICENSE.txt file)
 GUI part to show/modify a record data
 '''
 import wx
+import wx.adv
 from  TextCtrlAutoComplete import TextCtrlAutoComplete
 import database
 import datetime
@@ -71,7 +72,7 @@ class RecordWidget(wx.Window):
         self.txtFieldSizer.Add(self.lbTags,1,wx.EXPAND)
         
         self.txtDate = wx.StaticText(self.panel , -1 , _('document date'))
-        self.lbDate = wx.DatePickerCtrl(self.panel , -1,style=wx.DP_DROPDOWN)
+        self.lbDate = wx.adv.DatePickerCtrl(self.panel , -1,style=wx.adv.DP_DROPDOWN)
         self.txtFieldSizer.Add(self.txtDate,0)
         self.txtFieldSizer.Add(self.lbDate,1)
               
@@ -96,7 +97,7 @@ class RecordWidget(wx.Window):
         self.Bind(wx.EVT_SIZE,self.onResize)
         self.lbTitle.Bind(wx.EVT_TEXT,self.notifyModification)
         self.lbDescription.Bind(wx.EVT_TEXT,self.notifyModification)
-        self.lbDate.Bind(wx.EVT_DATE_CHANGED,self.notifyModification)
+        self.lbDate.Bind(wx.adv.EVT_DATE_CHANGED,self.notifyModification)
         self.lbFileName.Bind(wx.EVT_FILEPICKER_CHANGED,self.notifyModification)
         self.lbFolders.Bind(wx.EVT_LIST_DELETE_ITEM,self.notifyModification)
         self.lbFolders.Bind(wx.EVT_LIST_INSERT_ITEM,self.notifyModification)

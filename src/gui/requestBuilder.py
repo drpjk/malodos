@@ -9,6 +9,7 @@ GUI dialog for building a search request
 '''
 
 import wx
+import wx.adv
 import wx.richtext as rt
 import logging
 import utilities
@@ -158,7 +159,7 @@ class builderConditionPanel(wx.Panel):
             self.chbWholeWord.Value=False
         else:
             self.chbWholeWord.Value=wholeWord
-        self.dcCondDate = wx.DatePickerCtrl(self)
+        self.dcCondDate = wx.adv.DatePickerCtrl(self)
         try:
             if criteria is not None : self.dcCondDate.SetValue(criteria)
         except:

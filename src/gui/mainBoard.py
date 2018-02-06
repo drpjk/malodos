@@ -212,9 +212,9 @@ class BasketView(wx.Window):
         self.panel.SetLabel(_('Ascending order'))
 #        self.icBar=wx.ToolBar(self.panel)
 #        self.icBar.SetToolBitmapSize((32,32))
-#        self.icBar.AddLabelTool(self.ID_REMOVE,'',wx.Bitmap(Resources.get_icon_filename('REMOVE_SELECTION32')),shortHelp=_('Remove/delete all documents in the basket'))
-#        self.icBar.AddLabelTool(self.ID_MERGE,'',wx.Bitmap(Resources.get_icon_filename('MERGE_SELECTION32')),shortHelp=_('Merge together all documents in the basket'))
-#        self.icBar.AddLabelTool(self.ID_TOGO,'',wx.Bitmap(Resources.get_icon_filename('DOC_ZIP32')),shortHelp=_('Make a portable zip of all the documents in the basket'))
+#        self.icBar.AddTool(self.ID_REMOVE,'',wx.Bitmap(Resources.get_icon_filename('REMOVE_SELECTION32')),shortHelp=_('Remove/delete all documents in the basket'))
+#        self.icBar.AddTool(self.ID_MERGE,'',wx.Bitmap(Resources.get_icon_filename('MERGE_SELECTION32')),shortHelp=_('Merge together all documents in the basket'))
+#        self.icBar.AddTool(self.ID_TOGO,'',wx.Bitmap(Resources.get_icon_filename('DOC_ZIP32')),shortHelp=_('Make a portable zip of all the documents in the basket'))
         self.bxSizer=wx.BoxSizer(wx.HORIZONTAL)
         self.btUpdateRemove = wx.BitmapButton(self.panel,-1,wx.Bitmap(Resources.get_icon_filename('REMOVE_SELECTION32')))
         self.btUpdateRemove.SetToolTip(_('Remove/delete all documents in the basket'))
@@ -325,7 +325,7 @@ class FolderView(wx.Window):
     def fillWith(self,docList):
         self.trFolders.DeleteAllItems()
         if docList is None : return
-        rootItem=self.trFolders.AddRoot(_('ROOT'),data=wx.TreeItemData(0))
+        rootItem=self.trFolders.AddRoot(_('ROOT'),data=(0))
         unclassified = self.trFolders.AppendItem(rootItem,_('Unclassified'))
         itemDict={}
         for row in docList:
@@ -333,7 +333,7 @@ class FolderView(wx.Window):
             docID = row[database.theBase.IDX_ROWID]
             folderID_list = database.theBase.folders_list_for(docID)
             if len(folderID_list)<1:
-                item=self.trFolders.AppendItem(unclassified,title,data=wx.TreeItemData(row))
+                item=self.trFolders.AppendItem(unclassified,title,data=(row))
                 if docID in self.board.basket_idList() : self.trFolders.SetItemTextColour(item,wx.RED)
             for folderID in folderID_list:
                 genealogy = database.theBase.folders_genealogy_of(folderID, False)
@@ -344,7 +344,7 @@ class FolderView(wx.Window):
                     else:
                         item = self.trFolders.AppendItem(item,fName)
                         itemDict[fID] = item
-                item=self.trFolders.AppendItem(item,title,data=wx.TreeItemData(row))
+                item=self.trFolders.AppendItem(item,title,data=(row))
                 if docID in self.board.basket_idList() : self.trFolders.SetItemTextColour(item,wx.RED)
         #self.trFolders.Expand(rootItem)
     def draw_content(self):
@@ -408,7 +408,7 @@ class TagFolderView(FolderView):
             cur = database.theBase.get_by_doc_id(toShow)
             if cur is None : cur=[]
             for row in cur:
-                itm = self.trFolders.AppendItem(item,row[database.theBase.IDX_TITLE],data=wx.TreeItemData(row))
+                itm = self.trFolders.AppendItem(item,row[database.theBase.IDX_TITLE],data=(row))
                 if row[database.theBase.IDX_ROWID] in self.board.basket_idList() : self.trFolders.SetItemTextColour(itm,wx.RED)
                 usedDoc.append(row[database.theBase.IDX_ROWID])
             docList3 = list(set.difference(set(docList),set(docList2)))
@@ -419,7 +419,7 @@ class TagFolderView(FolderView):
     def fillWith(self,docList):
         self.trFolders.DeleteAllItems()
         if docList is None : return
-        rootItem=self.trFolders.AddRoot(_('ROOT'),data=wx.TreeItemData(0))
+        rootItem=self.trFolders.AddRoot(_('ROOT'),data=(0))
         self.recursiveFill(rootItem, [row[database.theBase.IDX_ROWID] for row in docList],[],True)
     def draw_content(self):
         def show_under(item):
@@ -480,17 +480,17 @@ class MainFrame(wx.Frame):
         self.docViewSizer.Add(self.docWin,1,wx.EXPAND)
         
         self.tbMainBar = self.CreateToolBar()
-        self.tbMainBar.AddLabelTool(self.ID_ADD_FILE,'',wx.Bitmap(Resources.get_icon_filename('ADD_FILE')),shortHelp=_('Add an existing file'))
-        self.tbMainBar.AddLabelTool(self.ID_ADD_SCAN,'',wx.Bitmap(Resources.get_icon_filename('ADD_SCAN')),shortHelp=_('Scanning a new document'))
-        self.tbMainBar.AddLabelTool(self.ID_REMOVE_SEL,'',wx.Bitmap(Resources.get_icon_filename('REMOVE_SELECTION')),shortHelp=_('Remove the current selection from the database'))
-        self.tbMainBar.AddLabelTool(self.ID_PRINT_DOC,'',wx.Bitmap(Resources.get_icon_filename('DOC_PRINT')),shortHelp=_('Print the selected document'))
-        self.tbMainBar.AddLabelTool(self.ID_DOCBASKET,'',wx.Bitmap(Resources.get_icon_filename('DOC_BASKET')),shortHelp=Resources.get_message('DOC_BASKET'))
-        self.tbMainBar.AddLabelTool(self.ID_DOCTOGO,'',wx.Bitmap(Resources.get_icon_filename('DOC_ZIP')),shortHelp=Resources.get_message('DOC_ZIP'))
-        self.tbMainBar.AddLabelTool(self.ID_SURVEY,'',wx.Bitmap(Resources.get_icon_filename('SURVEY_WIN')),shortHelp=_('Open the directory survey window'))
-        self.tbMainBar.AddLabelTool(self.ID_PREFS,'',wx.Bitmap(Resources.get_icon_filename('PREFS')),shortHelp=_('Set preferences'))
-        self.tbMainBar.AddLabelTool(self.ID_CREDITS,'',wx.Bitmap(Resources.get_icon_filename('CREDITS')),shortHelp=_('Credits'))
-        self.tbMainBar.AddLabelTool(self.ID_BUGREPORT,'',wx.Bitmap(Resources.get_icon_filename('BUGREPORT')),shortHelp=_('Report a bug'))
-        self.tbMainBar.AddLabelTool(self.ID_SUPPORT,'',wx.Bitmap(Resources.get_icon_filename('SUPPORT')),shortHelp=_('Support MALODOS'))
+        self.tbMainBar.AddTool(self.ID_ADD_FILE,'',wx.Bitmap(Resources.get_icon_filename('ADD_FILE')),shortHelp=_('Add an existing file'))
+        self.tbMainBar.AddTool(self.ID_ADD_SCAN,'',wx.Bitmap(Resources.get_icon_filename('ADD_SCAN')),shortHelp=_('Scanning a new document'))
+        self.tbMainBar.AddTool(self.ID_REMOVE_SEL,'',wx.Bitmap(Resources.get_icon_filename('REMOVE_SELECTION')),shortHelp=_('Remove the current selection from the database'))
+        self.tbMainBar.AddTool(self.ID_PRINT_DOC,'',wx.Bitmap(Resources.get_icon_filename('DOC_PRINT')),shortHelp=_('Print the selected document'))
+        self.tbMainBar.AddTool(self.ID_DOCBASKET,'',wx.Bitmap(Resources.get_icon_filename('DOC_BASKET')),shortHelp=Resources.get_message('DOC_BASKET'))
+        self.tbMainBar.AddTool(self.ID_DOCTOGO,'',wx.Bitmap(Resources.get_icon_filename('DOC_ZIP')),shortHelp=Resources.get_message('DOC_ZIP'))
+        self.tbMainBar.AddTool(self.ID_SURVEY,'',wx.Bitmap(Resources.get_icon_filename('SURVEY_WIN')),shortHelp=_('Open the directory survey window'))
+        self.tbMainBar.AddTool(self.ID_PREFS,'',wx.Bitmap(Resources.get_icon_filename('PREFS')),shortHelp=_('Set preferences'))
+        self.tbMainBar.AddTool(self.ID_CREDITS,'',wx.Bitmap(Resources.get_icon_filename('CREDITS')),shortHelp=_('Credits'))
+        self.tbMainBar.AddTool(self.ID_BUGREPORT,'',wx.Bitmap(Resources.get_icon_filename('BUGREPORT')),shortHelp=_('Report a bug'))
+        self.tbMainBar.AddTool(self.ID_SUPPORT,'',wx.Bitmap(Resources.get_icon_filename('SUPPORT')),shortHelp=_('Support MALODOS'))
         self.tbMainBar.Realize()
         
         self.recordPart = RecordWidget.RecordWidget(self.docViewPanel)

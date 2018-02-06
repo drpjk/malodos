@@ -60,7 +60,7 @@ class SurveyWindow(wx.Dialog):
                 #if len(file_list)<1 : return
                 relPath = os.path.relpath(dr, rootDir)
                 if relPath == '.' :
-                    currentItem = self.docList.AppendItem(self.docList.GetRootItem() , rootDir ,data=wx.TreeItemData(rootDir))
+                    currentItem = self.docList.AppendItem(self.docList.GetRootItem() , rootDir ,data=(rootDir))
                 else:
                     dir_comp = relPath.split(os.path.sep)
                     currentItem = rootItem
@@ -79,13 +79,13 @@ class SurveyWindow(wx.Dialog):
                     return
                 for f in dir_list:
                     fname = os.path.join(dr,f)
-                    self.docList.AppendItem(currentItem,f,data=wx.TreeItemData(f))
+                    self.docList.AppendItem(currentItem,f,data=(f))
                 for f in file_list:
                     fname = os.path.join(dr,f)
-                    self.docList.AppendItem(currentItem,f,data=wx.TreeItemData('*'+fname))
+                    self.docList.AppendItem(currentItem,f,data=('*'+fname))
             
             self.docList.DeleteAllItems() #self.docList.Clear()# 
-            rootItem = self.docList.AddRoot(_('Files not in the database'),data=wx.TreeItemData("root"))
+            rootItem = self.docList.AddRoot(_('Files not in the database'),data=("root"))
             (dir_list,recursiveIdx) = database.theConfig.get_survey_directory_list()
             for i in range(len(dir_list)):
                 dname = dir_list[i].decode('utf8')
