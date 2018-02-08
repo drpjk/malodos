@@ -8,6 +8,7 @@ attached to this project (LICENSE.txt file)
 GUI frame of the main application board
 '''
 import wx
+import wx.adv
 import addFileWindow
 import RecordWidget
 import docWindow
@@ -18,7 +19,7 @@ import docPrinter
 from data import theData
 import fileMerge
 
-#import scanWindow
+import scanWindow
 import survey
 from gui import utilities
 import hashlib
@@ -880,7 +881,7 @@ the GNU General Public License along with File Hunter; if not, write to
 the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"""
 
 
-        info = wx.AboutDialogInfo()
+        info = wx.adv.AboutDialogInfo()
 
         info.SetIcon(wx.Icon(Resources.get_icon_filename('APPLICATION'), wx.BITMAP_TYPE_PNG))
         info.SetName('MALODOS')
@@ -890,7 +891,7 @@ the Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  0211
         info.SetWebSite('http://sites.google.com/site/malodospage')
         info.AddArtist('http://icones.pro')
         info.SetLicence(licence)
-        wx.AboutBox(info)
+        wx.adv.AboutBox(info)
     def actionSupport(self,event):
         webbrowser.open('https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=D7H33JFSFA98J&lc=IL&item_name=David%20GUEZ&item_number=MALODOS&currency_code=ILS&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted')
     def actionReport(self,event):

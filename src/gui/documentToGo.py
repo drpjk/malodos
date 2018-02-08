@@ -22,8 +22,8 @@ class DocToGoWizard (wx.adv.Wizard):
         self.page_archive_import = PageActionArchiveOpening(self)
         self.row_list=row_list
         self.doc_list=doc_list
-        self.Bind(wx.adv.WizardEvent.EVT_WIZARD_FINISHED, self.on_finished)
-        self.Bind(wx.adv.WizardEvent.EVT_WIZARD_CANCEL, self.on_cancel)
+        self.Bind(wx.adv.EVT_WIZARD_FINISHED, self.on_finished)
+        self.Bind(wx.adv.EVT_WIZARD_CANCEL, self.on_cancel)
         self.GetPageAreaSizer().Add(self.page_chooser)
     def on_cancel(self,event):
         if not utilities.ask(_('Are you sure you want to cancel to document to go wizard ?')) : event.Veto()
@@ -67,7 +67,7 @@ class DocToGoWizard (wx.adv.Wizard):
             else:
                 database.theBase.import_archive(filename, dirname)
 
-class PageActionChooser (wx.adv.PyWizardPage):
+class PageActionChooser (wx.adv.WizardPage):
     EXPORT_DATABASE=1
     EXPORT_ARCHIVE=2
     IMPORT_ARCHIVE=3
@@ -77,7 +77,7 @@ class PageActionChooser (wx.adv.PyWizardPage):
     SELECTED_DOCS=3
     BASKET_DOCS=4
     def __init__(self,parent):
-        wx.adv.PyWizardPage.__init__(self,parent)
+        wx.adv.WizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         self.choice_list = { self.EXPORT_DATABASE:_('Export all of part of the database.') ,
                              self.EXPORT_ARCHIVE :_('Create an archive with some or all of your documents, along with a database to browse into.'),
@@ -115,9 +115,9 @@ class PageActionChooser (wx.adv.PyWizardPage):
         return None
 
 
-class PageActionDatabaseExport (wx.adv.PyWizardPage):
+class PageActionDatabaseExport (wx.adv.WizardPage):
     def __init__(self,parent):
-        wx.adv.PyWizardPage.__init__(self,parent)
+        wx.adv.WizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         s = _('Path of exported database')
         self.sizer.Add(wx.StaticText(self,label=s))
@@ -129,9 +129,9 @@ class PageActionDatabaseExport (wx.adv.PyWizardPage):
     def GetPrev(self):
         return self.Parent.page_chooser
 
-class PageActionArchiveCreation (wx.adv.PyWizardPage):
+class PageActionArchiveCreation (wx.adv.WizardPage):
     def __init__(self,parent):
-        wx.adv.PyWizardPage.__init__(self,parent)
+        wx.adv.WizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         s = _('Path of exported archive')
         self.sizer.Add(wx.StaticText(self,label=s))
@@ -142,9 +142,9 @@ class PageActionArchiveCreation (wx.adv.PyWizardPage):
         return None
     def GetPrev(self):
         return self.Parent.page_chooser
-class PageActionArchiveOpening (wx.adv.PyWizardPage):
+class PageActionArchiveOpening (wx.adv.WizardPage):
     def __init__(self,parent):
-        wx.adv.PyWizardPage.__init__(self,parent)
+        wx.adv.WizardPage.__init__(self,parent)
         self.sizer = wx.BoxSizer(wx.VERTICAL)
         s = _('Path of archive to import')
         self.sizer.Add(wx.StaticText(self,label=s))

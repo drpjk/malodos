@@ -210,7 +210,7 @@ class PrefSurveyDir(wx.Window):
         
         (item_list,checked) = database.theConfig.get_survey_directory_list()
         self.lstSurveyDirs.SetItems(item_list)
-        self.lstSurveyDirs.SetChecked(checked)
+        self.lstSurveyDirs.SetCheckedItems(checked)
         S = database.theConfig.get_survey_extension_list()
         self.txtSurveyExt.SetValue(S)
         self.panel.SetSizerAndFit(self.dirSurveySizer)
@@ -226,7 +226,7 @@ class PrefSurveyDir(wx.Window):
         for e in elems : self.lstSurveyDirs.Delete(e)
     def actionSave(self):
         dir_list = self.lstSurveyDirs.GetItems()
-        recursiveIndex = self.lstSurveyDirs.GetChecked()
+        recursiveIndex = self.lstSurveyDirs.GetCheckedItems()
         database.theConfig.set_survey_directory_list(dir_list, recursiveIndex)
         database.theConfig.set_survey_extension_list(self.txtSurveyExt.GetValue())
         

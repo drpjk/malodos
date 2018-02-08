@@ -365,7 +365,7 @@ class SurveyWindow(wx.Dialog):
 #        self.dirSurveyFrame.populate()
 #        self.missOCRFrame.populate()
 #        self.fileProblemsFrame.populate()
-        self.SetSizeWH(1000,600)
+        self.SetSize(1000,600)
     #===========================================================================
     def SetModeAdd(self):
         self.btAddRecord.SetLabel(_('Add'))

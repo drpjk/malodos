@@ -33,9 +33,10 @@ from database import Resources
 class OptionsWindow(wx.Dialog):
 	def __init__(self, parent, optList,defaultValues=None):
 		wx.Dialog.__init__(self, parent, -1, _('Scanning options'), wx.DefaultPosition)
+#		self.SetMinSize(wx.Size(800,800))
 		self.ScrollWindow = wx.ScrolledWindow(self, -1)
 		self.panel = wx.Panel(self.ScrollWindow,-1)
-		self.totalWin = wx.GridSizer(1,2)
+		self.totalWin = wx.GridSizer(2,gap=wx.Size(12,12))
 
 		k=0
 		self.txtOpt = list()
@@ -230,7 +231,7 @@ class ScanWindow(wx.Dialog):
 		self.panel.SetSizerAndFit(self.totalWin)
 		self.SetSize(self.GetSize())
 		self.stSource.Label = self.scanner.chooseSource(database.theConfig.get_current_scanner())
-		self.SetSizeWH(550,800)
+		self.SetSize(550,800)
 		
 		self.currentOptions=dict()
 		op_ini  =  database.theConfig.get_all_params_in('scanner_options')

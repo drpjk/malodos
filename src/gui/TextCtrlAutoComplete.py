@@ -438,8 +438,8 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin ):
         mustHide = self._mustHide or len(self._choices)==0
         if not mustHide and show :
             size = self.dropdown.GetSize()
-            width, height = self . GetSizeTuple()
-            x, y = self . ClientToScreenXY ( 0, height )
+            width, height = self . GetSize()
+            x, y = self . ClientToScreen ( 0, height )
             if size.GetWidth() != width :
                 size.SetWidth(width)
                 self.dropdown.SetSize(size)
